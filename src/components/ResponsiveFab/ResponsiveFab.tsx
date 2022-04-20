@@ -12,6 +12,7 @@ export const ResponsiveFab = ({
   icon: Icon,
   label,
   to,
+  ...other
 }: ResponsiveFabProps) => (
   <>
     <Box
@@ -22,7 +23,7 @@ export const ResponsiveFab = ({
         bottom: 16,
       }}
     >
-      <Fab color="primary" component={Link} to={to}>
+      <Fab color="primary" component={Link} to={to} {...other}>
         <Icon />
       </Fab>
     </Box>
@@ -35,7 +36,13 @@ export const ResponsiveFab = ({
         bottom: 32,
       }}
     >
-      <Fab component={Link} to={to} color="primary" variant="extended">
+      <Fab
+        component={Link}
+        to={to}
+        color="primary"
+        variant="extended"
+        {...other}
+      >
         <Icon sx={{ mr: 1 }} />
         {label}
       </Fab>

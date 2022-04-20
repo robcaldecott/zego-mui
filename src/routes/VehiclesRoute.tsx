@@ -5,7 +5,7 @@ import { useMatch } from "@tanstack/react-location";
 import { ResponsiveFab, Vehicles } from "@/components";
 import type { LocationGenerics } from "@/types";
 
-export const VehiclesRoute = () => {
+const VehiclesRoute = () => {
   const {
     data: { vehicles = [] },
   } = useMatch<LocationGenerics>();
@@ -21,3 +21,5 @@ export const VehiclesRoute = () => {
     </Container>
   );
 };
+
+export default VehiclesRoute;

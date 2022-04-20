@@ -4,7 +4,7 @@ import { useMatch } from "@tanstack/react-location";
 import { Fleets, PageHeader } from "@/components";
 import type { LocationGenerics } from "@/types";
 
-export const FleetsRoute = () => {
+const FleetsRoute = () => {
   const {
     data: { fleets = [] },
   } = useMatch<LocationGenerics>();
@@ -21,3 +21,5 @@ export const FleetsRoute = () => {
     </>
   );
 };
+
+export default FleetsRoute;

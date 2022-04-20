@@ -3,7 +3,7 @@ import { useMatch } from "@tanstack/react-location";
 import { Details } from "@/components";
 import type { LocationGenerics } from "@/types";
 
-export const DetailsRoute = () => {
+const DetailsRoute = () => {
   const {
     data: { vehicle },
   } = useMatch<LocationGenerics>();
@@ -14,3 +14,5 @@ export const DetailsRoute = () => {
     </Container>
   );
 };
+
+export default DetailsRoute;
