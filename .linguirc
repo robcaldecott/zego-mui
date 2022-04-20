@@ -1,0 +1,19 @@
+{
+  "sourceLocale": "en-GB",
+  "fallbackLocales": {
+    "en_GB": "en-GB"
+  },
+  "catalogs": [
+    {
+      "path": "locales/{locale}/messages",
+      "include": [
+        "pages/",
+        "components/"
+      ]
+    }
+  ],
+  "locales": [
+    "en-GB"
+  ],
+  "format": "minimal"
+}
