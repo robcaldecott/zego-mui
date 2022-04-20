@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "Modern Era";
+  font-display: swap;
+  src: url("/fonts/ModernEra-Regular.woff2") format("woff2"),
+    url("/fonts/ModernEra-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Modern Era";
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/ModernEra-Medium.woff2") format("woff2"),
+    url("/fonts/ModernEra-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Modern Era";
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/ModernEra-Bold.woff2") format("woff2"),
+    url("/fonts/ModernEra-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Modern Era";
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/ModernEra-Black.woff2") format("woff2"),
+    url("/fonts/ModernEra-Black.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Modern Era";
+  font-style: italic;
+  font-display: swap;
+  src: url("/fonts/ModernEra-Italic.woff2") format("woff2"),
+    url("/fonts/ModernEra-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Modern Era";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/ModernEra-BoldItalic.woff2") format("woff2"),
+    url("/fonts/ModernEra-BoldItalic.woff") format("woff");
+}

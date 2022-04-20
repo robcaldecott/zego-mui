@@ -1,41 +1,56 @@
 const path = require("path");
 
 module.exports = {
-  stories: [
-    "../components/**/*.stories.@(js|jsx|ts|tsx)",
-    "../providers/**/*.stories.@(js|jsx|ts|tsx)",
-  ],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "storybook-addon-next-router",
     "storybook-dark-mode",
   ],
   framework: "@storybook/react",
   core: {
-    builder: "webpack5",
+    builder: "@storybook/builder-vite",
   },
   reactOptions: {
     fastRefresh: true,
   },
-  webpackFinal: (config) => {
-    config.resolve.alias["@"] = path.resolve(__dirname, "../");
-    config.resolve.alias["@emotion/core"] = path.resolve(
-      __dirname,
-      "../node_modules/@emotion/react"
-    );
-    config.resolve.alias["emotion-theming"] = path.resolve(
-      __dirname,
-      "../node_modules/@emotion/react"
-    );
-    return config;
-  },
-  babel: async (options) => {
-    return {
-      ...options,
-      plugins: [...options.plugins, "macros"],
-      babelrc: false,
+  staticDirs: ["../public"],
+  async viteFinal(config, { configType }) {
+    config.plugins = [
+      ...config.plugins.filter((plugin) => {
+        return !(
+          Array.isArray(plugin) && plugin[0].name === "vite:react-babel"
+        );
+      }),
+      require("@vitejs/plugin-react")({
+        exclude: [/\.stories\.(t|j)sx?$/, /node_modules/],
+        babel: { plugins: ["macros"] },
+      }),
+    ];
+    // config.optimizeDeps = {
+    //   ...(config.optimizeDeps || {}),
+    //   include: [
+    //     ...(config?.optimizeDeps?.include || []),
+    //     // Imports from preview.tsx
+    //     "msw-storybook-addon",
+    //     "storybook-dark-mode",
+    //     "storybook-addon-intl",
+    //   ],
+    // };
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        "@": path.resolve(__dirname, "../src"),
+        "@emotion/core": path.resolve(
+          __dirname,
+          "../node_modules/@emotion/react"
+        ),
+        "emotion-theming": path.resolve(
+          __dirname,
+          "../node_modules/@emotion/react"
+        ),
+      },
     };
+    return config;
   },
 };
