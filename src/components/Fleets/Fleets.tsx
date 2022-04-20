@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { t } from "@lingui/macro";
-import { Box, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { Fleet } from "@/types";
 import { Link } from "../Link";

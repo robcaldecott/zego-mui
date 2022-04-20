@@ -1,15 +1,6 @@
-import { Trans } from "@lingui/macro";
-import { Add } from "@mui/icons-material";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
-import {
-  AppHeader,
-  CreateSimple,
-  Details,
-  NavDrawer,
-  ResponsiveFab,
-  Vehicles,
-} from "@/components";
+import { AppHeader, NavDrawer } from "@/components";
 import { fetchFleets, fetchVehicle, fetchVehicles } from "@/queries";
 import { CreateRoute, DetailsRoute, VehiclesRoute } from "@/routes";
 import { FleetsRoute } from "@/routes/FleetsRoute";

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import { en } from "make-plural/plurals";
-import { useDarkMode } from "storybook-dark-mode";
 import {
   createMemoryHistory,
   ReactLocation,
   Router,
 } from "@tanstack/react-location";
+import { en } from "make-plural/plurals";
+import { useDarkMode } from "storybook-dark-mode";
 import { ThemeProvider, useThemeMode } from "@/providers";
-import "../src/main.css";
+import "./fonts.css";
 
 i18n.loadLocaleData("en-GB", { plurals: en });
 i18n.load("en-GB", {});
