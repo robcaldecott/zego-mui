@@ -11,3 +11,5 @@ export const createVehicle = (payload: VehiclePayload) =>
   http.post("/api/vehicles", { json: payload });
 
 export const fetchFleets = () => http.get("/api/fleets");
+
+export const fetchFleet = (id: string) => http.get(`/api/fleets/${id}`);

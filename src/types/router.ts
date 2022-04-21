@@ -7,8 +7,10 @@ export type LocationGenerics = MakeGenerics<{
     vehicles: Vehicle[];
     vehicle: Vehicle;
     fleets: Fleet[];
+    fleet: Fleet;
   };
   Params: {
     vehicleId: string;
+    fleetId: string;
   };
 }>;

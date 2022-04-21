@@ -49,6 +49,14 @@ const handlers = [
     "/api/fleets",
     (req, res, ctx) => res(ctx.delay(), ctx.json(fleets))
   ),
+  rest.get<DefaultRequestBody, { fleetId: string }, Fleet>(
+    "/api/fleets/:fleetId",
+    (req, res, ctx) => {
+      const { fleetId } = req.params;
+      const fleet = fleets.find((fleet) => fleet.uuid === fleetId);
+      return fleet ? res(ctx.delay(), ctx.json(fleet)) : res(ctx.status(404));
+    }
+  ),
 ];
 
 export { handlers };

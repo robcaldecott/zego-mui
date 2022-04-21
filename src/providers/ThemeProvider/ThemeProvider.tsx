@@ -10,6 +10,7 @@ import {
   createTheme,
   CssBaseline,
   darken,
+  lighten,
   PaletteMode,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
@@ -72,6 +73,9 @@ const ThemeProvider = ({
             '"Segoe UI Symbol"',
           ].join(","),
         },
+        shape: {
+          borderRadius: 0,
+        },
         palette: {
           mode,
           primary: {
@@ -81,7 +85,7 @@ const ThemeProvider = ({
             main: mode === "light" ? ZEGO_PURPLE : ZEGO_GREEN,
           },
           background: {
-            default: mode === "light" ? "#eee" : "#303030",
+            default: mode === "light" ? lighten(ZEGO_GREEN, 0.85) : "#303030",
           },
         },
         components: {
@@ -110,7 +114,7 @@ const ThemeProvider = ({
           MuiFab: {
             styleOverrides: {
               root: {
-                borderRadius: "0.5rem",
+                borderRadius: "0rem",
                 textTransform: "none",
               },
             },

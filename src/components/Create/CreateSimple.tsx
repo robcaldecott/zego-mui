@@ -26,9 +26,9 @@ export const CreateSimple = () => {
 
   return (
     <>
-      <Breadcrumbs />
+      {/* <Breadcrumbs /> */}
 
-      <Paper>
+      <Paper variant="outlined">
         <Typography variant="h5" padding={2}>
           <Trans>Create new vehicle</Trans>
         </Typography>
@@ -49,7 +49,7 @@ export const CreateSimple = () => {
                 },
               });
               // Success
-              navigate({ to: "/" });
+              navigate({ to: ".." });
             } catch (e) {
               setSubmitting(false);
             }
@@ -222,7 +222,7 @@ export const CreateSimple = () => {
                   type="button"
                   variant="outlined"
                   color="secondary"
-                  onClick={() => navigate({ to: "/" })}
+                  onClick={() => navigate({ to: ".." })}
                   sx={{ width: { xs: 1, sm: "auto" } }}
                   disabled={submitting}
                 >

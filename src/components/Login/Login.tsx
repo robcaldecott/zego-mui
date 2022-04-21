@@ -9,11 +9,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link } from "@/components";
+import { Link } from "../Link";
 // import NextLink from "next/link";
 import { ZegoFleetHorizontal } from "../ZegoFleetHorizontal";
 
-export const Login = () => {
+interface LoginProps {
+  onLogin: () => void;
+}
+
+export const Login = (props: LoginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [language, setLanguage] = useState("en-GB");
@@ -37,7 +41,8 @@ export const Login = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            console.log({ email, password });
+            // console.log({ email, password });
+            props.onLogin();
           }}
         >
           <Paper sx={{ p: 4, width: { xs: 300, sm: 336 } }}>

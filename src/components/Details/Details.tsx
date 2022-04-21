@@ -14,7 +14,6 @@ import {
 import { useNavigate } from "@tanstack/react-location";
 import type { Vehicle } from "@/types";
 import { http } from "@/utils";
-import { Breadcrumbs } from "../Breadcrumbs";
 import { DeleteDialog } from "../DeleteDialog";
 
 interface DetailsProps {
@@ -32,11 +31,8 @@ export const Details = ({ vehicle }: DetailsProps) => {
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <Breadcrumbs registrationNumber={vehicle.registrationNumber} />
-
       {/* Vehicle details card */}
-      <Card aria-label={t`Vehicle details`}>
+      <Card aria-label={t`Vehicle details`} variant="outlined">
         <CardHeader
           title={`${vehicle.manufacturer} ${vehicle.model} ${vehicle.type}`}
           titleTypographyProps={{ noWrap: true }}

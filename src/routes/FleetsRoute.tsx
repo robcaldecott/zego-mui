@@ -1,7 +1,9 @@
 import { Trans } from "@lingui/macro";
+import { Home } from "@mui/icons-material";
 import { Container } from "@mui/material";
+import { Breadcrumbs } from "@mui/material";
 import { useMatch } from "@tanstack/react-location";
-import { Fleets, PageHeader } from "@/components";
+import { Fleets, FleetsTable, Link, PageHeader } from "@/components";
 import type { LocationGenerics } from "@/types";
 
 const FleetsRoute = () => {
@@ -10,15 +12,23 @@ const FleetsRoute = () => {
   } = useMatch<LocationGenerics>();
 
   return (
-    <>
-      <PageHeader>
-        <Trans>Fleets</Trans>
-      </PageHeader>
+    <Container maxWidth="xl">
+      <Breadcrumbs sx={{ my: 2 }}>
+        <Link to="/" sx={{ display: "flex", alignItems: "center" }}>
+          <Home sx={{ mr: 0.5 }} />
+          Fleets
+        </Link>
+      </Breadcrumbs>
 
-      <Container maxWidth="xl" sx={{ py: 4 }}>
-        <Fleets fleets={fleets} />
-      </Container>
-    </>
+      {/* <Fleets fleets={fleets} /> */}
+      <FleetsTable
+        rows={fleets.map((fleet) => ({
+          ...fleet,
+          manager: fleet.manager.name,
+          country: fleet.country.displayName,
+        }))}
+      />
+    </Container>
   );
 };
 
