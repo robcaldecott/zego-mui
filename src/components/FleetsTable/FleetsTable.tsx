@@ -223,7 +223,10 @@ export function FleetsTable({ rows }: FleetsTableProps) {
                   return (
                     <StyledTableRow tabIndex={-1} key={row.uuid}>
                       <StyledTableCell component="th" id={labelId} scope="row">
-                        <Link to={`/fleets/${row.uuid}`}>{row.name}</Link>,
+                        <Link to={`/fleets/${row.uuid}`} preload={1}>
+                          {row.name}
+                        </Link>
+                        ,
                       </StyledTableCell>
                       <StyledTableCell>{row.manager}</StyledTableCell>
                       <StyledTableCell>{row.country}</StyledTableCell>

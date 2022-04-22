@@ -48,7 +48,7 @@ export const DriversTable = ({ drivers }: DriversTableProps) => {
   });
 
   return (
-    <Paper sx={{ width: "100%" }}>
+    <Paper sx={{ width: "100%" }} variant="outlined">
       <DataGrid
         rows={rows}
         columns={columns}

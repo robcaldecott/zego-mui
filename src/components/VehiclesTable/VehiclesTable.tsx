@@ -245,7 +245,9 @@ export function VehiclesTable({ rows }: VehiclesTableProps) {
                   return (
                     <StyledTableRow tabIndex={-1} key={row.id}>
                       <StyledTableCell component="th" id={labelId} scope="row">
-                        <Link to={row.id}>{row.registrationNumber}</Link>
+                        <Link to={row.id} preload={1}>
+                          {row.registrationNumber}
+                        </Link>
                       </StyledTableCell>
                       <StyledTableCell>{row.manufacturer}</StyledTableCell>
                       <StyledTableCell>{row.model}</StyledTableCell>
