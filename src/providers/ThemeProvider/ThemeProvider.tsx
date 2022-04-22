@@ -15,6 +15,7 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
 
+// TODO: augment theme palette for access to these
 const ZEGO_GREEN = "rgba(70, 225, 140)";
 const ZEGO_PURPLE = "rgba(55, 25, 135)";
 
@@ -106,16 +107,7 @@ const ThemeProvider = ({
             styleOverrides: {
               root: {
                 textTransform: "none",
-                // borderRadius: "1rem",
                 letterSpacing: "0rem",
-              },
-            },
-          },
-          MuiFab: {
-            styleOverrides: {
-              root: {
-                borderRadius: "0rem",
-                textTransform: "none",
               },
             },
           },
