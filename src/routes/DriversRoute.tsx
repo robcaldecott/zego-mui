@@ -1,17 +1,17 @@
 import { Trans } from "@lingui/macro";
-import { Business, DirectionsCar, Home } from "@mui/icons-material";
+import { Business, Home, Person } from "@mui/icons-material";
 import { Breadcrumbs, Container, Typography } from "@mui/material";
 import { useMatch } from "@tanstack/react-location";
-import { Link, VehiclesTable } from "@/components";
+import { DriversTable, Link } from "@/components";
 import type { LocationGenerics } from "@/types";
 
 const VehiclesRoute = () => {
   const {
-    data: { fleet, vehicles },
+    data: { fleet, drivers },
   } = useMatch<LocationGenerics>();
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ mb: 2 }}>
       <Breadcrumbs sx={{ my: 2 }}>
         <Link to="/" sx={{ display: "flex", alignItems: "center" }}>
           <Home sx={{ mr: 0.5 }} />
@@ -30,12 +30,12 @@ const VehiclesRoute = () => {
           color="text.primary"
           sx={{ display: "flex", alignItems: "center" }}
         >
-          <DirectionsCar sx={{ mr: 0.5 }} />
-          Vehicles
+          <Person sx={{ mr: 0.5 }} />
+          Drivers
         </Typography>
       </Breadcrumbs>
 
-      <VehiclesTable rows={vehicles!} />
+      <DriversTable drivers={drivers!} />
     </Container>
   );
 };

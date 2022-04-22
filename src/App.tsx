@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { ReactLocation, Router } from "@tanstack/react-location";
 import { AppShell, Fallback } from "@/components";
 import {
+  fetchDrivers,
   fetchFleet,
   fetchFleets,
   fetchVehicle,
@@ -15,6 +16,7 @@ const DetailsRoute = lazy(() => import("@/routes/DetailsRoute"));
 const CreateRoute = lazy(() => import("@/routes/CreateRoute"));
 const FleetsRoute = lazy(() => import("@/routes/FleetsRoute"));
 const FleetRoute = lazy(() => import("@/routes/FleetRoute"));
+const DriversRouter = lazy(() => import("@/routes/DriversRoute"));
 
 const location = new ReactLocation<LocationGenerics>();
 
@@ -58,6 +60,14 @@ export const App = () => {
                     loader: async ({ params: { fleetId } }) => ({
                       fleet: await fetchFleet(fleetId),
                       vehicles: await fetchVehicles(),
+                    }),
+                  },
+                  {
+                    path: "fleets/:fleetId/drivers",
+                    element: <DriversRouter />,
+                    loader: async ({ params: { fleetId } }) => ({
+                      fleet: await fetchFleet(fleetId),
+                      drivers: await fetchDrivers(fleetId),
                     }),
                   },
                   {

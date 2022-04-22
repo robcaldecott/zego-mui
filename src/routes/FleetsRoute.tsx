@@ -3,7 +3,7 @@ import { Home } from "@mui/icons-material";
 import { Container } from "@mui/material";
 import { Breadcrumbs } from "@mui/material";
 import { useMatch } from "@tanstack/react-location";
-import { Fleets, FleetsTable, Link, PageHeader } from "@/components";
+import { FleetsTable, Link } from "@/components";
 import type { LocationGenerics } from "@/types";
 
 const FleetsRoute = () => {

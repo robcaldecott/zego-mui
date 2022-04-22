@@ -1,6 +1,7 @@
 import { DefaultRequestBody, PathParams, rest } from "msw";
 import { v4 as uuidv4 } from "uuid";
-import { Fleet, Vehicle } from "@/types";
+import { Driver, Fleet, Vehicle } from "@/types";
+import { drivers } from "./drivers";
 import { fleets } from "./fleets";
 import { randomVehicles } from "./vehicles";
 
@@ -49,6 +50,7 @@ const handlers = [
     "/api/fleets",
     (req, res, ctx) => res(ctx.delay(), ctx.json(fleets))
   ),
+  // Fetch a fleet
   rest.get<DefaultRequestBody, { fleetId: string }, Fleet>(
     "/api/fleets/:fleetId",
     (req, res, ctx) => {
@@ -56,6 +58,11 @@ const handlers = [
       const fleet = fleets.find((fleet) => fleet.uuid === fleetId);
       return fleet ? res(ctx.delay(), ctx.json(fleet)) : res(ctx.status(404));
     }
+  ),
+  // Fetch drivers for a fleet
+  rest.get<DefaultRequestBody, PathParams, Driver[]>(
+    "/api/fleets/:fleetId/drivers",
+    (req, res, ctx) => res(ctx.delay(), ctx.json(drivers))
   ),
 ];
 

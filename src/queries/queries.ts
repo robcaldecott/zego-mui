@@ -13,3 +13,6 @@ export const createVehicle = (payload: VehiclePayload) =>
 export const fetchFleets = () => http.get("/api/fleets");
 
 export const fetchFleet = (id: string) => http.get(`/api/fleets/${id}`);
+
+export const fetchDrivers = (id: string) =>
+  http.get(`/api/fleets/${id}/drivers`);

@@ -17,8 +17,16 @@ import {
   Toolbar,
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
-import { Fleet } from "@/types";
 import { Link } from "../Link";
+
+interface Fleet {
+  uuid: string;
+  name: string;
+  activeVehicleCount: number;
+  activePolicyCount: number;
+  country: string;
+  manager: string;
+}
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -180,8 +188,6 @@ interface FleetsTableProps {
 export function FleetsTable({ rows }: FleetsTableProps) {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Fleet>("name");
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(50);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -190,18 +196,6 @@ export function FleetsTable({ rows }: FleetsTableProps) {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-    setPage(1);
-  };
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
   };
 
   return (
@@ -218,13 +212,11 @@ export function FleetsTable({ rows }: FleetsTableProps) {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
             />
             <TableBody>
               {rows
                 .slice()
                 .sort(getComparator(order, orderBy))
-                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -247,15 +239,6 @@ export function FleetsTable({ rows }: FleetsTableProps) {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        /> */}
       </Paper>
     </Box>
   );
