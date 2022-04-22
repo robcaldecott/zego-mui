@@ -6,12 +6,32 @@ import {
   MenuItem,
   Paper,
   Stack,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
 import { Link } from "../Link";
 // import NextLink from "next/link";
 import { ZegoFleetHorizontal } from "../ZegoFleetHorizontal";
+
+const Background = styled("main")`
+  min-height: 100vh;
+  width: 100%;
+  background-image: radial-gradient(
+      49.97% 75.51% at 0% 100%,
+      #b932ff 0%,
+      rgba(55, 25, 135, 0) 100%
+    ),
+    radial-gradient(
+      50.03% 75.61% at 100% 0%,
+      #27252d 0%,
+      rgba(55, 25, 135, 0) 100%
+    );
+  background-color: #371987;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 interface LoginProps {
   onLogin: () => void;
@@ -23,25 +43,13 @@ export const Login = (props: LoginProps) => {
   const [language, setLanguage] = useState("en-GB");
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        width: "100%",
-        backgroundImage:
-          "radial-gradient(49.97% 75.51% at 0% 100%, #B932FF 0%, rgba(55, 25, 135, 0) 100%), radial-gradient(50.03% 75.61% at 100% 0%, #27252D 0%, rgba(55, 25, 135, 0) 100%)",
-        backgroundColor: "#371987",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Background>
       <Stack spacing={4}>
         <ZegoFleetHorizontal color="white" height="32px" width="100%" />
 
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            // console.log({ email, password });
             props.onLogin();
           }}
         >
@@ -106,6 +114,6 @@ export const Login = (props: LoginProps) => {
           </MenuItem>
         </TextField>
       </Stack>
-    </Box>
+    </Background>
   );
 };

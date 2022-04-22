@@ -3,7 +3,7 @@ import { Home } from "@mui/icons-material";
 import { Container } from "@mui/material";
 import { Breadcrumbs } from "@mui/material";
 import { useMatch } from "@tanstack/react-location";
-import { FleetsTable, Link } from "@/components";
+import { BreadcrumbItem, FleetsTable } from "@/components";
 import type { LocationGenerics } from "@/types";
 
 const FleetsRoute = () => {
@@ -14,13 +14,9 @@ const FleetsRoute = () => {
   return (
     <Container maxWidth="xl">
       <Breadcrumbs sx={{ my: 2 }}>
-        <Link to="/" sx={{ display: "flex", alignItems: "center" }}>
-          <Home sx={{ mr: 0.5 }} />
-          Fleets
-        </Link>
+        <BreadcrumbItem icon={Home} label={<Trans>Fleets</Trans>} />
       </Breadcrumbs>
 
-      {/* <Fleets fleets={fleets} /> */}
       <FleetsTable
         rows={fleets.map((fleet) => ({
           ...fleet,

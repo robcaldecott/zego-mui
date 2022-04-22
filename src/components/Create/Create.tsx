@@ -24,7 +24,6 @@ import { fuelTypes, manufacturers } from "@/mocks";
 import type { VehiclePayload } from "@/types";
 import { http } from "@/utils";
 import "dayjs/locale/fi";
-import { Breadcrumbs } from "../Breadcrumbs";
 import { SelectColour } from "../SelectColour";
 
 interface Values extends Omit<VehiclePayload, "mileage" | "registrationDate"> {
@@ -100,8 +99,6 @@ export const Create = () => {
 
   return (
     <Container maxWidth="md" disableGutters>
-      <Breadcrumbs />
-
       <Paper>
         <Typography variant="h5" padding={2}>
           <Trans>Create new vehicle</Trans>

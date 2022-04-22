@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/macro";
 import { Business, Home } from "@mui/icons-material";
 import {
   Breadcrumbs,
@@ -10,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useMatch } from "@tanstack/react-location";
-import { Link } from "@/components";
+import { BreadcrumbItem, Link } from "@/components";
 import type { LocationGenerics } from "@/types";
 
 const FleetRoute = () => {
@@ -21,14 +22,8 @@ const FleetRoute = () => {
   return (
     <Container maxWidth="xl">
       <Breadcrumbs sx={{ mt: 2, mb: 4 }}>
-        <Link to="/" sx={{ display: "flex", alignItems: "center" }}>
-          <Home sx={{ mr: 0.5 }} />
-          Fleets
-        </Link>
-        <Typography sx={{ display: "flex", alignItems: "center" }}>
-          <Business sx={{ mr: 0.5 }} />
-          {fleet?.name}
-        </Typography>
+        <BreadcrumbItem to="/" icon={Home} label={<Trans>Fleets</Trans>} />
+        <BreadcrumbItem icon={Business} label={fleet?.name} />
       </Breadcrumbs>
 
       <Grid container spacing={4}>

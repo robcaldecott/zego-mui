@@ -1,7 +1,8 @@
+import { Trans } from "@lingui/macro";
 import { Add, Business, DirectionsCar, Home } from "@mui/icons-material";
-import { Breadcrumbs, Container, Typography } from "@mui/material";
+import { Breadcrumbs, Container } from "@mui/material";
 import { useMatch } from "@tanstack/react-location";
-import { CreateSimple, Link } from "@/components";
+import { BreadcrumbItem, CreateSimple } from "@/components";
 import type { LocationGenerics } from "@/types";
 
 const CreateRoute = () => {
@@ -12,34 +13,18 @@ const CreateRoute = () => {
   return (
     <Container maxWidth="xl">
       <Breadcrumbs sx={{ my: 2 }}>
-        <Link to="/" sx={{ display: "flex", alignItems: "center" }}>
-          <Home sx={{ mr: 0.5 }} />
-          Fleets
-        </Link>
-
-        <Link
+        <BreadcrumbItem to="/" icon={Home} label={<Trans>Fleets</Trans>} />
+        <BreadcrumbItem
           to={`/fleets/${fleet?.uuid}`}
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <Business sx={{ mr: 0.5 }} />
-          {fleet?.name}
-        </Link>
-
-        <Link
+          icon={Business}
+          label={fleet?.name}
+        />
+        <BreadcrumbItem
           to={`/fleets/${fleet?.uuid}/vehicles`}
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <DirectionsCar sx={{ mr: 0.5 }} />
-          Vehicles
-        </Link>
-
-        <Typography
-          color="text.primary"
-          sx={{ display: "flex", alignItems: "center" }}
-        >
-          <Add sx={{ mr: 0.5 }} />
-          Add vehicle
-        </Typography>
+          icon={DirectionsCar}
+          label={<Trans>Vehicles</Trans>}
+        />
+        <BreadcrumbItem icon={Add} label={<Trans>Add vehicle</Trans>} />
       </Breadcrumbs>
 
       <Container maxWidth="md">
