@@ -27,23 +27,23 @@ const FleetsPage: NextPage<FleetsPageProps> = ({ fleets }) => (
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Server side cookies
   const token = getCookie("token", context);
-
   if (token === undefined) {
+    // If we're not logged in then redirect to the login page
     return {
       redirect: {
-        destination: "/login",
+        destination: `/login?redirectTo=${context.resolvedUrl}`,
         permanent: false,
       },
     };
   }
 
   const response = await fetch("https://zego.backend/fleets");
-  const fleets = await response.json();
 
   return {
     props: {
-      fleets,
+      fleets: await response.json(),
     },
   };
 };

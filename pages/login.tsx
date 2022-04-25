@@ -10,7 +10,7 @@ const LoginPage: NextPage & { useLayout: boolean } = () => {
     <Login
       onLogin={() => {
         setCookies("token", "LOGGEDIN");
-        router.replace("/");
+        router.replace((router.query.redirectTo as string) || "/");
       }}
     />
   );
