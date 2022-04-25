@@ -12,4 +12,6 @@ const WrappedLink = forwardRef<HTMLAnchorElement, LocationLinkProps>(
 export const Link = forwardRef<
   HTMLAnchorElement,
   LocationLinkProps & MuiLinkProps
->((props, ref) => <MuiLink ref={ref} component={WrappedLink} {...props} />);
+>(({ href, ...props }, ref) => (
+  <MuiLink ref={ref} component={WrappedLink} to={href} {...props} />
+));

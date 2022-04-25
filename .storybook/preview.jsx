@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-location";
 import { en } from "make-plural/plurals";
 import { useDarkMode } from "storybook-dark-mode";
-import { ThemeProvider, useThemeMode } from "@/providers";
+import { AuthProvider, ThemeProvider, useThemeMode } from "@/providers";
 import "./fonts.css";
 
 i18n.loadLocaleData("en-GB", { plurals: en });
@@ -37,21 +37,23 @@ const ThemeWrapper = ({ children }) => {
 
 export const decorators = [
   (Story) => (
-    <I18nProvider i18n={i18n}>
-      <ThemeProvider initialMode={useDarkMode() ? "dark" : "light"}>
-        <ThemeWrapper>
-          <Router
-            location={
-              new ReactLocation({
-                history: createMemoryHistory(),
-              })
-            }
-            routes={[]}
-          >
-            <Story />
-          </Router>
-        </ThemeWrapper>
-      </ThemeProvider>
-    </I18nProvider>
+    <AuthProvider>
+      <I18nProvider i18n={i18n}>
+        <ThemeProvider initialMode={useDarkMode() ? "dark" : "light"}>
+          <ThemeWrapper>
+            <Router
+              location={
+                new ReactLocation({
+                  history: createMemoryHistory(),
+                })
+              }
+              routes={[]}
+            >
+              <Story />
+            </Router>
+          </ThemeWrapper>
+        </ThemeProvider>
+      </I18nProvider>
+    </AuthProvider>
   ),
 ];

@@ -6,6 +6,7 @@ export * from "./DeleteDialog";
 export * from "./Details";
 export * from "./DriversTable";
 export * from "./Fallback";
+export * from "./FleetCard";
 export * from "./FleetsTable";
 export * from "./LicencePlate";
 export * from "./Link";
