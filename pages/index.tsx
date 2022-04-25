@@ -1,6 +1,7 @@
 import { Trans } from "@lingui/macro";
 import { Home } from "@mui/icons-material";
 import { Breadcrumbs, Container } from "@mui/material";
+import { getCookie } from "cookies-next";
 import type { GetServerSideProps, NextPage } from "next";
 import { BreadcrumbItem, FleetsTable } from "@/components";
 import type { Fleet } from "@/types";
@@ -25,7 +26,18 @@ const FleetsPage: NextPage<FleetsPageProps> = ({ fleets }) => (
   </Container>
 );
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const token = getCookie("token", context);
+
+  if (token === undefined) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
   const response = await fetch("https://zego.backend/fleets");
   const fleets = await response.json();
 

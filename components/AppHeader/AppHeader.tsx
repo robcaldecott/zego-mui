@@ -20,6 +20,8 @@ import {
   Toolbar,
 } from "@mui/material";
 import { lightBlue, yellow } from "@mui/material/colors";
+import { removeCookies } from "cookies-next";
+import { useRouter } from "next/router";
 import { useAuth, useThemeMode } from "@/providers";
 import { Link } from "../Link";
 import { ZegoFleetHorizontal } from "../ZegoFleetHorizontal";
@@ -30,8 +32,14 @@ export const AppHeader = () => {
   const { mode, toggle } = useThemeMode();
   const { logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const router = useRouter();
 
   const handleClose = () => setAnchorEl(null);
+
+  const handleLogout = () => {
+    removeCookies("token");
+    router.push("/login");
+  };
 
   return (
     <AppBar position="sticky">
@@ -75,7 +83,7 @@ export const AppHeader = () => {
               </ListItemIcon>
               <ListItemText>Profile</ListItemText>
             </MenuItem>
-            <MenuItem onClick={logout}>
+            <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <Logout />
               </ListItemIcon>

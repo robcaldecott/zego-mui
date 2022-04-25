@@ -1,17 +1,8 @@
-// import type { AppProps } from "next/app";
-// import Head from "next/head";
-
-// // Mock the API
-// require("../mocks/index");
-
-// const Myapp = ({ Component, pageProps }) => <Component {...pageProps} />;
-
-// export default Myapp;
-
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { en } from "make-plural/plurals";
+import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { AppShell } from "@/components";
@@ -30,6 +21,7 @@ i18n.activate("en-GB");
 const clientSideEmotionCache = createEmotionCache();
 
 interface MyAppProps extends AppProps {
+  Component: NextPage & { useLayout: boolean };
   emotionCache?: EmotionCache;
 }
 
@@ -37,23 +29,31 @@ const Myapp = ({
   Component,
   pageProps,
   emotionCache = clientSideEmotionCache,
-}: MyAppProps) => (
-  <CacheProvider value={emotionCache}>
-    <Head>
-      <meta name="viewport" content="initial-scale=1, width=device-width" />
-    </Head>
-    <ThemeProvider>
-      <I18nProvider i18n={i18n}>
-        <AuthProvider>
-          <FilterProvider>
-            <AppShell>
-              <Component {...pageProps} />
-            </AppShell>
-          </FilterProvider>
-        </AuthProvider>
-      </I18nProvider>
-    </ThemeProvider>
-  </CacheProvider>
-);
+}: MyAppProps) => {
+  const getAppShell = Component.useLayout ?? true;
+
+  return (
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <ThemeProvider>
+        <I18nProvider i18n={i18n}>
+          <AuthProvider>
+            <FilterProvider>
+              {getAppShell ? (
+                <AppShell>
+                  <Component {...pageProps} />
+                </AppShell>
+              ) : (
+                <Component {...pageProps} />
+              )}
+            </FilterProvider>
+          </AuthProvider>
+        </I18nProvider>
+      </ThemeProvider>
+    </CacheProvider>
+  );
+};
 
 export default Myapp;

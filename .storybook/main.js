@@ -19,6 +19,7 @@ module.exports = {
   reactOptions: {
     fastRefresh: true,
   },
+  staticDirs: ["../public"],
   webpackFinal: (config) => {
     config.resolve.alias["@"] = path.resolve(__dirname, "../");
     config.resolve.alias["@emotion/core"] = path.resolve(
