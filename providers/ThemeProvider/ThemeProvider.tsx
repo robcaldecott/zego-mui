@@ -73,7 +73,7 @@ const ThemeProvider = ({
           ].join(","),
         },
         shape: {
-          borderRadius: 0,
+          borderRadius: 8,
         },
         palette: {
           mode,
