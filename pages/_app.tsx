@@ -1,13 +1,26 @@
+// import type { AppProps } from "next/app";
+// import Head from "next/head";
+
+// // Mock the API
+// require("../mocks/index");
+
+// const Myapp = ({ Component, pageProps }) => <Component {...pageProps} />;
+
+// export default Myapp;
+
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { en } from "make-plural/plurals";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { Layout } from "@/components";
-import { FilterProvider, ThemeProvider } from "@/providers";
+import { AppShell } from "@/components";
+import { AuthProvider, FilterProvider, ThemeProvider } from "@/providers";
 import { createEmotionCache } from "@/utils";
 import "../styles/globals.css";
+
+// Mock the API
+require("../mocks");
 
 i18n.loadLocaleData("en-GB", { plurals: en });
 i18n.load("en-GB", {});
@@ -31,11 +44,13 @@ const Myapp = ({
     </Head>
     <ThemeProvider>
       <I18nProvider i18n={i18n}>
-        <FilterProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </FilterProvider>
+        <AuthProvider>
+          <FilterProvider>
+            <AppShell>
+              <Component {...pageProps} />
+            </AppShell>
+          </FilterProvider>
+        </AuthProvider>
       </I18nProvider>
     </ThemeProvider>
   </CacheProvider>

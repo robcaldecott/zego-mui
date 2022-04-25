@@ -1,6 +1,6 @@
+import { nanoid } from "nanoid";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { v4 as uuidv4 } from "uuid";
-import { vehicles } from "@/mocks";
+import { vehicles } from "@/mocks/data";
 import type { Vehicle } from "@/types";
 
 interface Data {
@@ -34,7 +34,7 @@ export default function handler(
       );
       break;
     case "POST":
-      res.status(200).json({ id: uuidv4(), ...req.body });
+      res.status(200).json({ id: nanoid(), ...req.body });
       break;
     default:
       res.setHeader("Allow", ["GET", "POST"]);

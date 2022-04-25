@@ -35,7 +35,12 @@ export const DeleteDialog = ({
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button variant="outlined" color="secondary" onClick={onClose}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={onClose}
+        sx={{ flexBasis: "50%" }}
+      >
         <Trans>Cancel</Trans>
       </Button>
       <Button
@@ -43,6 +48,7 @@ export const DeleteDialog = ({
         color="error"
         startIcon={<DeleteOutline />}
         onClick={onDelete}
+        sx={{ flexBasis: "50%" }}
       >
         <Trans>Delete</Trans>
       </Button>

@@ -1,6 +1,7 @@
 import { PathParams, rest } from "msw";
 import { setupServer } from "msw/node";
-import { afterAll,beforeAll, expect, it } from "vitest";
+import { afterAll, beforeAll, expect, it } from "vitest";
+import { colors, fuelTypes, manufacturers } from "@/mocks/data";
 import type { Vehicle } from "@/types";
 import { render, screen, userEvent } from "@/utils/test-utils";
 import { CreateSimple } from "./CreateSimple";
@@ -15,7 +16,16 @@ beforeAll(() => server.listen());
 afterAll(() => server.close());
 
 it("submits", async () => {
-  render(<CreateSimple />);
+  render(
+    <CreateSimple
+      fleetId="123"
+      config={{
+        colors: colors(),
+        fuelTypes: fuelTypes(),
+        manufacturers: manufacturers(),
+      }}
+    />
+  );
   // Check for the "Home" link
   expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
   // Title

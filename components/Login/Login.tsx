@@ -3,41 +3,53 @@ import { Trans } from "@lingui/macro";
 import {
   Box,
   Button,
-  Link,
   MenuItem,
   Paper,
   Stack,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
-import NextLink from "next/link";
+import { Link } from "@/components";
 import { ZegoFleetHorizontal } from "../ZegoFleetHorizontal";
 
-export const Login = () => {
+const Background = styled("main")`
+  min-height: 100vh;
+  width: 100%;
+  background-image: radial-gradient(
+      49.97% 75.51% at 0% 100%,
+      #b932ff 0%,
+      rgba(55, 25, 135, 0) 100%
+    ),
+    radial-gradient(
+      50.03% 75.61% at 100% 0%,
+      #27252d 0%,
+      rgba(55, 25, 135, 0) 100%
+    );
+  background-color: #371987;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+interface LoginProps {
+  onLogin: () => void;
+}
+
+export const Login = (props: LoginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [language, setLanguage] = useState("en-GB");
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        width: "100%",
-        backgroundImage:
-          "radial-gradient(49.97% 75.51% at 0% 100%, #B932FF 0%, rgba(55, 25, 135, 0) 100%), radial-gradient(50.03% 75.61% at 100% 0%, #27252D 0%, rgba(55, 25, 135, 0) 100%)",
-        backgroundColor: "#371987",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Background>
       <Stack spacing={4}>
         <ZegoFleetHorizontal color="white" height="32px" width="100%" />
 
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            console.log({ email, password });
+            props.onLogin();
           }}
         >
           <Paper sx={{ p: 4, width: { xs: 300, sm: 336 } }}>
@@ -68,11 +80,9 @@ export const Login = () => {
                   onChange={(event) => setPassword(event.target.value)}
                   sx={{ marginBottom: 1 }}
                 />
-                <NextLink href="/forgot-password" passHref>
-                  <Link underline="hover">
-                    <Trans>Forgot password</Trans>
-                  </Link>
-                </NextLink>
+                <Link href="/forgot-password">
+                  <Trans>Forgot password</Trans>
+                </Link>
               </div>
 
               {/* Login button */}
@@ -103,6 +113,6 @@ export const Login = () => {
           </MenuItem>
         </TextField>
       </Stack>
-    </Box>
+    </Background>
   );
 };

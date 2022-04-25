@@ -72,6 +72,9 @@ const ThemeProvider = ({
             '"Segoe UI Symbol"',
           ].join(","),
         },
+        shape: {
+          borderRadius: 0,
+        },
         palette: {
           mode,
           primary: {
@@ -102,16 +105,7 @@ const ThemeProvider = ({
             styleOverrides: {
               root: {
                 textTransform: "none",
-                // borderRadius: "1rem",
                 letterSpacing: "0rem",
-              },
-            },
-          },
-          MuiFab: {
-            styleOverrides: {
-              root: {
-                borderRadius: "0.5rem",
-                textTransform: "none",
               },
             },
           },

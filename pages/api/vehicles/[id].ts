@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { vehicles } from "@/mocks";
+import { vehicles } from "@/mocks/data";
 import type { Vehicle } from "@/types";
 
 export default function handler(

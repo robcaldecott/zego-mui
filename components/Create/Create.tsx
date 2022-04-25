@@ -18,13 +18,12 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import * as yup from "yup";
-import { fuelTypes, manufacturers } from "@/mocks";
+import { fuelTypes, manufacturers } from "@/mocks/data";
 import type { VehiclePayload } from "@/types";
 import { http } from "@/utils";
 import "dayjs/locale/fi";
-import { Breadcrumbs } from "../Breadcrumbs";
 import { SelectColour } from "../SelectColour";
 
 interface Values extends Omit<VehiclePayload, "mileage" | "registrationDate"> {
@@ -56,7 +55,7 @@ const schema = yup
   .required();
 
 export const Create = () => {
-  const router = useRouter();
+  // const router = useRouter();
   useEffect(() => {
     dayjs.extend(utc);
   }, []);
@@ -92,7 +91,7 @@ export const Create = () => {
         },
       });
       // Success
-      router.push("/");
+      // router.push("/");
     } catch (e) {
       // TODO: report errors
     }
@@ -100,8 +99,6 @@ export const Create = () => {
 
   return (
     <Container maxWidth="md" disableGutters>
-      <Breadcrumbs />
-
       <Paper>
         <Typography variant="h5" padding={2}>
           <Trans>Create new vehicle</Trans>
@@ -293,7 +290,7 @@ export const Create = () => {
                     type="button"
                     variant="outlined"
                     color="secondary"
-                    onClick={() => router.push("/")}
+                    // onClick={() => router.push("/")}
                     sx={{ width: { xs: 1, sm: "auto" } }}
                   >
                     <Trans>Cancel</Trans>

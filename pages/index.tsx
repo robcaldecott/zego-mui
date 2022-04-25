@@ -1,32 +1,39 @@
 import { Trans } from "@lingui/macro";
-import { Add } from "@mui/icons-material";
-import { Container } from "@mui/material";
+import { Home } from "@mui/icons-material";
+import { Breadcrumbs, Container } from "@mui/material";
 import type { GetServerSideProps, NextPage } from "next";
-import Link from "next/link";
-import { ResponsiveFab, Vehicles } from "@/components";
-import { randomVehicles } from "@/mocks";
-import type { Vehicle } from "@/types";
+import { BreadcrumbItem, FleetsTable } from "@/components";
+import type { Fleet } from "@/types";
 
-interface VehiclesPageProps {
-  vehicles: Vehicle[];
+interface FleetsPageProps {
+  fleets: Fleet[];
 }
 
-const VehiclesPage: NextPage<VehiclesPageProps> = ({ vehicles }) => (
-  <Container maxWidth="lg" sx={{ pt: 4 }}>
-    <Vehicles vehicles={vehicles} fabPadding />
+const FleetsPage: NextPage<FleetsPageProps> = ({ fleets }) => (
+  <Container maxWidth="xl">
+    <Breadcrumbs sx={{ my: 2 }}>
+      <BreadcrumbItem icon={Home} label={<Trans>Fleets</Trans>} />
+    </Breadcrumbs>
 
-    <Link href="/create" passHref>
-      <ResponsiveFab icon={Add} label={<Trans>Create Vehicle</Trans>} />
-    </Link>
+    <FleetsTable
+      rows={fleets.map((fleet) => ({
+        ...fleet,
+        manager: fleet.manager.name,
+        country: fleet.country.displayName,
+      }))}
+    />
   </Container>
 );
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await fetch("https://zego.backend/fleets");
+  const fleets = await response.json();
+
   return {
     props: {
-      vehicles: randomVehicles(25),
+      fleets,
     },
   };
 };
 
-export default VehiclesPage;
+export default FleetsPage;

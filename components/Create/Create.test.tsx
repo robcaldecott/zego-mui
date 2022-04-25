@@ -1,8 +1,8 @@
 import { PathParams, rest } from "msw";
 import { setupServer } from "msw/node";
-import { afterAll,beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import type { Vehicle } from "@/types";
-import { act, fireEvent,render, screen, userEvent } from "@/utils/test-utils";
+import { render, screen, userEvent } from "@/utils/test-utils";
 import { Create } from "./Create";
 
 describe("Create", () => {

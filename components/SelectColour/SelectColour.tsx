@@ -6,7 +6,7 @@ import {
   TextField,
   TextFieldProps,
 } from "@mui/material";
-import { colors } from "@/mocks";
+import { colors } from "@/mocks/data";
 
 interface SelectColourProps
   extends Omit<

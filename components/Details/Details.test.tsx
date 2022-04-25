@@ -10,7 +10,7 @@ import {
   it,
   vi,
 } from "vitest";
-import { render, screen, userEvent,waitFor, within } from "@/utils/test-utils";
+import { render, screen, userEvent, waitFor, within } from "@/utils/test-utils";
 import { Details } from "./Details";
 
 const replace = vi.fn();
@@ -43,7 +43,7 @@ describe("Details", () => {
   afterAll(() => server.close());
 
   it("loads vehicle details", async () => {
-    render(<Details vehicle={vehicle} />);
+    render(<Details fleetId="123" vehicle={vehicle} />);
     // Wait for the details to load
     const card = within(screen.getByLabelText(/vehicle details/i));
     // Check the headings
@@ -67,7 +67,7 @@ describe("Details", () => {
         res(ctx.json({ id: req.params.id }))
       )
     );
-    render(<Details vehicle={vehicle} />);
+    render(<Details fleetId="123" vehicle={vehicle} />);
     // Click the Delete button
     await userEvent.click(
       screen.getByRole("button", { name: /delete vehicle/i })
