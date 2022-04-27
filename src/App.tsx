@@ -16,7 +16,7 @@ const DetailsRoute = lazy(() => import("@/routes/DetailsRoute"));
 const CreateRoute = lazy(() => import("@/routes/CreateRoute"));
 const FleetsRoute = lazy(() => import("@/routes/FleetsRoute"));
 const FleetRoute = lazy(() => import("@/routes/FleetRoute"));
-const DriversRouter = lazy(() => import("@/routes/DriversRoute"));
+const DriversRoute = lazy(() => import("@/routes/DriversRoute"));
 
 const location = new ReactLocation<LocationGenerics>();
 
@@ -64,7 +64,7 @@ export const App = () => {
                   },
                   {
                     path: "fleets/:fleetId/drivers",
-                    element: <DriversRouter />,
+                    element: <DriversRoute />,
                     loader: async ({ params: { fleetId } }) => ({
                       fleet: await fetchFleet(fleetId),
                       drivers: await fetchDrivers(fleetId),

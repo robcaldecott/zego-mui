@@ -26,7 +26,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: ["./src/setupMatchMedia.ts", "./src/setupTests.ts"],
+    // setupFiles: ["./src/setupMatchMedia.ts", "./src/setupTests.ts"],
+    setupFiles: ["./src/setupTests.ts"],
     // coverage: {
     //   exclude: [
     //     "**/*.test.tsx",
