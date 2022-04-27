@@ -1,10 +1,14 @@
 import { Trans } from "@lingui/macro";
 import { Home } from "@mui/icons-material";
 import { Breadcrumbs, Container } from "@mui/material";
-import { getCookie } from "cookies-next";
-import type { GetServerSideProps, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
 import { BreadcrumbItem, FleetsTable } from "@/components";
 import type { Fleet } from "@/types";
+import { withAuth } from "@/utils";
 
 interface FleetsPageProps {
   fleets: Fleet[];
@@ -26,26 +30,16 @@ const FleetsPage: NextPage<FleetsPageProps> = ({ fleets }) => (
   </Container>
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // Server side cookies
-  const token = getCookie("token", context);
-  if (token === undefined) {
-    // If we're not logged in then redirect to the login page
+export const getServerSideProps: GetServerSideProps = withAuth(
+  async (context: GetServerSidePropsContext) => {
+    const response = await fetch("https://zego.backend/fleets");
+
     return {
-      redirect: {
-        destination: `/login?redirectTo=${context.resolvedUrl}`,
-        permanent: false,
+      props: {
+        fleets: await response.json(),
       },
     };
   }
-
-  const response = await fetch("https://zego.backend/fleets");
-
-  return {
-    props: {
-      fleets: await response.json(),
-    },
-  };
-};
+);
 
 export default FleetsPage;

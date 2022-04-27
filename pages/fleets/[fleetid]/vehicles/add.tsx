@@ -1,9 +1,14 @@
 import { Trans } from "@lingui/macro";
 import { Add, Business, DirectionsCar, Home } from "@mui/icons-material";
 import { Breadcrumbs, Container } from "@mui/material";
-import type { GetServerSideProps, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
 import { BreadcrumbItem, CreateSimple } from "@/components";
 import type { Config, Fleet } from "@/types";
+import { withAuth } from "@/utils";
 
 interface AddVehiclePageProps {
   fleet: Fleet;
@@ -35,20 +40,22 @@ const AddVehiclePage: NextPage<AddVehiclePageProps> = ({ fleet, config }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const responses = await Promise.all([
-    fetch(`https://zego.backend/fleets/${context.params?.fleetid}`),
-    fetch(
-      `https://zego.backend/fleets/${context.params?.fleetid}/vehicleConfig`
-    ),
-  ]);
+export const getServerSideProps: GetServerSideProps = withAuth(
+  async (context: GetServerSidePropsContext) => {
+    const responses = await Promise.all([
+      fetch(`https://zego.backend/fleets/${context.params?.fleetid}`),
+      fetch(
+        `https://zego.backend/fleets/${context.params?.fleetid}/vehicleConfig`
+      ),
+    ]);
 
-  return {
-    props: {
-      fleet: await responses[0].json(),
-      config: await responses[1].json(),
-    },
-  };
-};
+    return {
+      props: {
+        fleet: await responses[0].json(),
+        config: await responses[1].json(),
+      },
+    };
+  }
+);
 
 export default AddVehiclePage;

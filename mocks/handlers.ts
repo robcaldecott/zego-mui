@@ -1,5 +1,5 @@
 import { DefaultRequestBody, PathParams, rest } from "msw";
-import { Driver, Fleet, Vehicle } from "@/types";
+import { Config, Driver, Fleet, Vehicle } from "@/types";
 import {
   colors,
   drivers,
@@ -41,19 +41,17 @@ export const handlers = [
     }
   ),
   // Fetch config used when adding a vehicle
-  rest.get<
-    DefaultRequestBody,
-    PathParams,
-    { colors: string[]; fuelTypes: string[]; manufacturers: string[] }
-  >("https://zego.backend/fleets/:fleetId/vehicleConfig", (req, res, ctx) =>
-    res(
-      ctx.delay(),
-      ctx.json({
-        colors: colors(),
-        fuelTypes: fuelTypes(),
-        manufacturers: manufacturers(),
-      })
-    )
+  rest.get<DefaultRequestBody, PathParams, Config>(
+    "https://zego.backend/fleets/:fleetId/vehicleConfig",
+    (req, res, ctx) =>
+      res(
+        ctx.delay(),
+        ctx.json({
+          colors: colors(),
+          fuelTypes: fuelTypes(),
+          manufacturers: manufacturers(),
+        })
+      )
   ),
   // Add a new vehicle
   rest.post<Omit<Vehicle, "id">, PathParams, Vehicle>(

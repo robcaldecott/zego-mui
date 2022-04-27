@@ -1,9 +1,14 @@
 import { Trans } from "@lingui/macro";
 import { Business, Home } from "@mui/icons-material";
 import { Breadcrumbs, Container, Grid } from "@mui/material";
-import type { GetServerSideProps, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
 import { BreadcrumbItem, FleetCard, FleetCardProps } from "@/components";
 import type { Fleet } from "@/types";
+import { withAuth } from "@/utils";
 
 interface DetailsPageProps {
   fleet: Fleet;
@@ -55,17 +60,19 @@ const DetailsPage: NextPage<DetailsPageProps> = ({ fleet }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await fetch(
-    `https://zego.backend/fleets/${context.params?.fleetid}`
-  );
-  const fleet = await response.json();
+export const getServerSideProps: GetServerSideProps = withAuth(
+  async (context: GetServerSidePropsContext) => {
+    const response = await fetch(
+      `https://zego.backend/fleets/${context.params?.fleetid}`
+    );
+    const fleet = await response.json();
 
-  return {
-    props: {
-      fleet,
-    },
-  };
-};
+    return {
+      props: {
+        fleet,
+      },
+    };
+  }
+);
 
 export default DetailsPage;

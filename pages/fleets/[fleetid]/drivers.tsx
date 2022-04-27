@@ -1,9 +1,14 @@
 import { Trans } from "@lingui/macro";
 import { Business, Home, Person } from "@mui/icons-material";
 import { Breadcrumbs, Container } from "@mui/material";
-import type { GetServerSideProps, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
 import { BreadcrumbItem, DriversTable } from "@/components";
 import { Driver, Fleet } from "@/types";
+import { withAuth } from "@/utils";
 
 interface DriversPageProps {
   fleet: Fleet;
@@ -28,18 +33,20 @@ const DriversPage: NextPage<DriversPageProps> = ({ fleet, drivers = [] }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const [fleetsResponse, driversResponse] = await Promise.all([
-    fetch(`https://zego.backend/fleets/${context.params?.fleetid}`),
-    fetch(`https://zego.backend/fleets/${context.params?.fleetid}/drivers`),
-  ]);
+export const getServerSideProps: GetServerSideProps = withAuth(
+  async (context: GetServerSidePropsContext) => {
+    const [fleetsResponse, driversResponse] = await Promise.all([
+      fetch(`https://zego.backend/fleets/${context.params?.fleetid}`),
+      fetch(`https://zego.backend/fleets/${context.params?.fleetid}/drivers`),
+    ]);
 
-  return {
-    props: {
-      fleet: await fleetsResponse.json(),
-      drivers: await driversResponse.json(),
-    },
-  };
-};
+    return {
+      props: {
+        fleet: await fleetsResponse.json(),
+        drivers: await driversResponse.json(),
+      },
+    };
+  }
+);
 
 export default DriversPage;

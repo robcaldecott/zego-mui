@@ -20,6 +20,7 @@ export default defineConfig({
       "@/queries": path.resolve(__dirname, "./queries"),
       "@/utils": path.resolve(__dirname, "./utils"),
       "@/providers": path.resolve(__dirname, "./providers"),
+      "@/types": path.resolve(__dirname, "./types"),
     },
   },
   test: {
