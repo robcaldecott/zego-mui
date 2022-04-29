@@ -75,7 +75,7 @@ const ThemeProvider = ({
           ].join(","),
         },
         shape: {
-          borderRadius: 0,
+          borderRadius: 8,
         },
         palette: {
           mode,
@@ -84,9 +84,6 @@ const ThemeProvider = ({
           },
           secondary: {
             main: mode === "light" ? ZEGO_PURPLE : ZEGO_GREEN,
-          },
-          background: {
-            default: mode === "light" ? lighten(ZEGO_GREEN, 0.85) : "#303030",
           },
         },
         components: {
